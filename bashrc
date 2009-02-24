@@ -56,4 +56,4 @@ alias df='df -h'
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
 # Editors ----------------------------------------------------------
-export EDITOR='emacs -fg white -bg black -cr white -fh'
+export EDITOR='emacs'
