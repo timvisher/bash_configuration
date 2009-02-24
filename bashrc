@@ -10,10 +10,8 @@ alias ls='ls -F --color=auto --show-control-chars'
 
 # Misc
 export HISTCONTROL=ignoredups
-shopt -s checkwinsize # After each command, checks the windows size and changes lines and columns
 
 # bash completion settings (actually, these are readline settings)
-bind "set completion-ignore-case on" # note: bind used instead of sticking these in .inputrc
 bind "set bell-style audible" # no bell
 
 # Turn on advanced bash completion if the file exists (get it here: http://www.caliban.org/bash/index.shtml#completion)
