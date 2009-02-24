@@ -22,7 +22,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Prompts ----------------------------------------------------------
-export PS1="\n[\[\e[0;32m\]\W\[\e[0m\]]$ "  # Primary prompt with only a path
+export PS1="\n[\[\e[0;32m\]\W\[\e[0m\]]\$ "  # Primary prompt with only a path
 export PS2='\[\e[0;32m\]>\[\e[0m\] '    # Secondary prompt
 export PS3='\[\e[0;32m\]#?\[\e[0m\] '   # Prompt 3
 export PS4='\[\e[0;32m\]+\[\e[0m\] '     # Prompt 4
