@@ -29,14 +29,14 @@ fi
 GIT_PS1_SHOWDIRTYSTATE=1
 
 # Prompts ----------------------------------------------------------
-export PS1='\n[\[\e[0;32m\]\W\[\e[0m\]]$(__git_ps1)\$ '  # Primary prompt with only a path
-export PS2='\[\e[0;32m\]>\[\e[0m\] '    # Secondary prompt
-export PS3='\[\e[0;32m\]#?\[\e[0m\] '   # Prompt 3
-export PS4='\[\e[0;32m\]+\[\e[0m\] '     # Prompt 4
+export PS1='\n[\[\e[0;32m\]\W\[\e[0m\]]$(__git_ps1)\$ '
+export PS2='\[\e[0;32m\]>\[\e[0m\] '
+export PS3='\[\e[0;32m\]#?\[\e[0m\] '
+export PS4='\[\e[0;32m\]+\[\e[0m\] '
 
 # Navigation -------------------------------------------------------
 alias ..='cd ..'
-alias ...='cd .. ; cd ..'
+alias ...='cd ../..'
 
 # Other aliases ----------------------------------------------------
 alias ll='ls -hl'
