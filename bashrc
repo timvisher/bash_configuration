@@ -1,7 +1,7 @@
 # See following for more information: http://www.infinitered.com/blog/?p=19
 
 if [ -d ~/.bin ]; then
-	export PATH=:~/bin:$PATH  # add your bin folder to the path, if you have it.  It's a good place to add all your scripts
+	export PATH=~/.bin:$PATH  # add your bin folder to the path, if you have it.  It's a good place to add all your scripts
 fi
 
 # Colors
