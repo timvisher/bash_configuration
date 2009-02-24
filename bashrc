@@ -21,16 +21,17 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# Git --------------------------------------------------------------
-function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
-}
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
-}
+# Git -------------------------------------------------------------
+
+# Turn on advanced git bash completion if the file exists
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
+fi
+
+GIT_PS1_SHOWDIRTYSTATE=1
 
 # Prompts ----------------------------------------------------------
-export PS1='\n[\[\e[0;32m\]\W\[\e[0m\]]$(parse_git_branch)\$ '  # Primary prompt with only a path
+export PS1='\n[\[\e[0;32m\]\W\[\e[0m\]]$(__git_ps1)\$ '  # Primary prompt with only a path
 export PS2='\[\e[0;32m\]>\[\e[0m\] '    # Secondary prompt
 export PS3='\[\e[0;32m\]#?\[\e[0m\] '   # Prompt 3
 export PS4='\[\e[0;32m\]+\[\e[0m\] '     # Prompt 4
