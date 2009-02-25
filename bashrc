@@ -1,23 +1,62 @@
-# See following for more information: http://www.infinitered.com/blog/?p=19
+# This file is a merge between the 3.7-1 /etc/defaults/etc/skel/ files and [http://www.infinitered.com/blog/?p=19]
 
-if [ -d ~/.bin ]; then
-	export PATH=~/.bin:$PATH  # add your bin folder to the path, if you have it.  It's a good place to add all your scripts
+# System Environment Variables
+
+# source the system wide bashrc if it exists
+if [ -e /etc/bash.bashrc ] ; then
+  source /etc/bash.bashrc
 fi
+
+# Set PATH so it includes user's private bin if it exists
+if [ -d ~/bin ] ; then
+  export PATH=~/bin:$PATH
+fi
+
+export PATH=~/bin/emacs/bin:$PATH
+
+# Set MANPATH so it includes users' private man if it exists
+if [ -d ~/man ]; then
+  MANPATH=~/man:$MANPATH
+fi
+
+# Set INFOPATH so it includes users' private info if it exists
+if [ -d ~/info ]; then
+  INFOPATH=~/info:$INFOPATH
+fi
+
+# Shell Options
+# #############
+
+# See man bash for more options...
+
+# Don't wait for job termination notification
+# set -o notify
+
+# Don't use ^D to exit
+# set -o ignoreeof
+
+# Use case-insensitive filename globbing
+# shopt -s nocaseglob
+
+# Make bash append rather than overwrite the history on disk
+shopt -s histappend
+
+# When changing directory small typos can be ignored by bash
+# for example, cd /vr/lgo/apaache would find /var/log/apache
+# shopt -s cdspell
+
+# If this shell is interactive, turn on programmable completion enhancements.
+# Any completions you add in ~/.bash_completion are sourced last.
+case $- in
+  *i*) [[ -f /etc/bash_completion ]] && . /etc/bash_completion ;;
+esac
 
 # Colors
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 alias ls='ls -F --color=auto --show-control-chars'
 
-# Misc
-export HISTCONTROL=ignoredups
-
-# bash completion settings (actually, these are readline settings)
-bind "set bell-style audible" # no bell
-
-# Turn on advanced bash completion if the file exists (get it here: http://www.caliban.org/bash/index.shtml#completion)
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+# Ignore duplicate commands in history
+export HISTCONTROL="ignoredups"
 
 # Git -------------------------------------------------------------
 
@@ -34,6 +73,12 @@ export PS2='\[\e[0;32m\]>\[\e[0m\] '
 export PS3='\[\e[0;32m\]#?\[\e[0m\] '
 export PS4='\[\e[0;32m\]+\[\e[0m\] '
 
+# Aliases
+
+# Default to human readable figures
+alias df='df -h'
+alias du='du -h'
+
 # Navigation -------------------------------------------------------
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -43,7 +88,7 @@ alias ll='ls -hl'
 alias la='ls -a'
 alias lla='ls -lah'
 
-# Misc
+# Misc -------------------------------------------------------------
 alias g='grep -i'  # Case insensitive grep
 alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder

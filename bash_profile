@@ -1,7 +1,9 @@
 # See following for more information: http://www.infinitered.com/blog/?p=19
 
-# Load in .bashrc
-source ~/.bashrc
+# source the users bashrc if it exists
+if [ -f ~/.bashrc ] ; then
+  source ~/.bashrc
+fi
 
 # Notes: ----------------------------------------------------------
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
@@ -26,4 +28,3 @@ echo -ne "Server time is: "; date
 echo -e "\nPATH: $PATH"
 echo -e "\nMANPATH: $MANPATH"
 
-emacs &
