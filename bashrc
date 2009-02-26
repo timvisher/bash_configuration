@@ -17,13 +17,13 @@ if [ -d ~/bin/emacs/bin ] ; then
 fi
 
 # Set MANPATH so it includes users' private man if it exists
-if [ -d ~/man ]; then
-  MANPATH=~/man:$MANPATH
+if [ -d ~/share/man ]; then
+  MANPATH=~/share/man:$MANPATH
 fi
 
 # Set INFOPATH so it includes users' private info if it exists
 if [ -d ~/info ]; then
-  INFOPATH=~/info:$INFOPATH
+  INFOPATH=~/share/info:$INFOPATH
 fi
 
 # Shell Options
