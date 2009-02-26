@@ -12,7 +12,9 @@ if [ -d ~/bin ] ; then
   export PATH=~/bin:$PATH
 fi
 
-export PATH=~/bin/emacs/bin:$PATH
+if [ -d ~/bin/emacs/bin ] ; then
+  export PATH=~/bin/emacs/bin:$PATH
+fi
 
 # Set MANPATH so it includes users' private man if it exists
 if [ -d ~/man ]; then
