@@ -3,8 +3,8 @@
 # System Environment Variables
 
 # source the system wide bashrc if it exists
-if [ -e /etc/bash.bashrc ] ; then
-  source /etc/bash.bashrc
+if [ -e /etc/bashrc ] ; then
+  source /etc/bashrc
 fi
 
 # Set PATH so it includes user's private bin if it exists
@@ -12,18 +12,14 @@ if [ -d ~/bin ] ; then
   export PATH=~/bin:$PATH
 fi
 
-if [ -d ~/bin/emacs/bin ] ; then
-  export PATH=~/bin/emacs/bin:$PATH
-fi
-
 # Set MANPATH so it includes users' private man if it exists
 if [ -d ~/share/man ]; then
-  MANPATH=~/share/man:$MANPATH
+  export MANPATH=~/share/man:$MANPATH
 fi
 
 # Set INFOPATH so it includes users' private info if it exists
-if [ -d ~/info ]; then
-  INFOPATH=~/share/info:$INFOPATH
+if [ -d ~/share/info ]; then
+  export INFOPATH=~/share/info:$INFOPATH
 fi
 
 # Shell Options
@@ -50,12 +46,12 @@ shopt -s histappend
 # If this shell is interactive, turn on programmable completion enhancements.
 # Any completions you add in ~/.bash_completion are sourced last.
 case $- in
-  *i*) [[ -f /etc/bash_completion ]] && . /etc/bash_completion ;;
+  *i*) [[ -f /opt/local/etc/bash_completion ]] && . /opt/local/etc/bash_completion ;;
 esac
 
 # Colors
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
-alias ls='ls -F --color=auto --show-control-chars'
+alias ls='ls -FG'
 
 # Ignore duplicate commands in history
 export HISTCONTROL="ignoredups"
