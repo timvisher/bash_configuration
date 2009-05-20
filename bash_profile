@@ -5,6 +5,32 @@ if [ -f ~/.bashrc ] ; then
   source ~/.bashrc
 fi
 
+# System Environment Variables
+
+# source the system wide bashrc if it exists
+if [ -e /etc/bash.bashrc ] ; then
+  source /etc/bash.bashrc
+fi
+
+# Set PATH so it includes user's private bin if it exists
+if [ -d ~/bin ] ; then
+  export PATH=~/bin:$PATH
+fi
+
+if [ -d ~/bin/emacs/bin ] ; then
+  export PATH=~/bin/emacs/bin:$PATH
+fi
+
+# Set MANPATH so it includes users' private man if it exists
+if [ -d ~/share/man ]; then
+  MANPATH=~/share/man:$MANPATH
+fi
+
+# Set INFOPATH so it includes users' private info if it exists
+if [ -d ~/info ]; then
+  INFOPATH=~/share/info:$INFOPATH
+fi
+
 # Notes: ----------------------------------------------------------
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
 # or create a new tab in iTerm) the following files are read and run, in this order:

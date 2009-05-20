@@ -1,31 +1,5 @@
 # This file is a merge between the 3.7-1 /etc/defaults/etc/skel/ files and [http://www.infinitered.com/blog/?p=19]
 
-# System Environment Variables
-
-# source the system wide bashrc if it exists
-if [ -e /etc/bash.bashrc ] ; then
-  source /etc/bash.bashrc
-fi
-
-# Set PATH so it includes user's private bin if it exists
-if [ -d ~/bin ] ; then
-  export PATH=~/bin:$PATH
-fi
-
-if [ -d ~/bin/emacs/bin ] ; then
-  export PATH=~/bin/emacs/bin:$PATH
-fi
-
-# Set MANPATH so it includes users' private man if it exists
-if [ -d ~/share/man ]; then
-  MANPATH=~/share/man:$MANPATH
-fi
-
-# Set INFOPATH so it includes users' private info if it exists
-if [ -d ~/info ]; then
-  INFOPATH=~/share/info:$INFOPATH
-fi
-
 # Shell Options
 # #############
 
