@@ -60,6 +60,10 @@ alias r='rm'
 alias rr='rm -r'
 alias rrf='rm -rf'
 
+# cp Convenience
+alias c='cp'
+alias cr='cp -R'
+
 # Default to human readable figures
 alias df='df -h'
 alias du='du -h'
