@@ -78,7 +78,7 @@ alias la='ls -a'
 alias lla='ls -lah'
 
 # Misc -------------------------------------------------------------
-alias g='grep -i'  # Case insensitive grep
+alias gr='grep -i'  # Case insensitive grep
 alias f='find . -iname'
 alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
 alias top='top -o cpu'
