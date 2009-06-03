@@ -55,6 +55,11 @@ export PS4='\[\e[0;32m\]+\[\e[0m\] '
 alias g=git
 alias gk=gitk
 
+# rm Convenience
+alias r='rm'
+alias rr='rm -r'
+alias rrf='rm -rf'
+
 # Default to human readable figures
 alias df='df -h'
 alias du='du -h'
