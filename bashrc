@@ -55,7 +55,14 @@ export HISTCONTROL="ignoredups"
 
 # Git -------------------------------------------------------------
 
+# Turn on advanced git bash completion if the file exists
+if [ -e ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
+fi
+
 GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
 
 alias g='git'
 alias gk='gitk'

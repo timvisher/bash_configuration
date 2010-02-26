@@ -52,12 +52,6 @@ else
     fi
 fi
 
-# Git
-# Turn on advanced git bash completion if the file exists
-if [ -f ~/.git-completion.bash ]; then
-    source ~/.git-completion.bash
-fi
-
 # Notes: ----------------------------------------------------------
 # When you start an interactive shell (log in, open terminal or iTerm in OS X, 
 # or create a new tab in iTerm) the following files are read and run, in this order:
@@ -84,5 +78,5 @@ fi
 echo -ne "Server time is: "; date
 echo -e "\nPATH: $PATH"
 echo -e "\nMANPATH: $MANPATH"
-echo -e "\nAliases:\n"; alias
+echo -e "\nAliases:"; alias
 
