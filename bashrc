@@ -12,14 +12,19 @@ if [ -d ~/bin ] ; then
   export PATH=~/bin:$PATH
 fi
 
+# MacPorts
+if [ -d /opt ] ; then
+  export PATH=/opt/local/bin:$PATH
+  export MANPATH=/opt/local/man:$MANPATH
+fi
+
+if [ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin ] ; then
+  export PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin:$PATH
+fi
+
 # Set MANPATH so it includes users' private man if it exists
 if [ -d ~/share/man ]; then
   export MANPATH=~/share/man:$MANPATH
-fi
-
-# Set INFOPATH so it includes users' private info if it exists
-if [ -d ~/share/info ]; then
-  export INFOPATH=~/share/info:$INFOPATH
 fi
 
 # Shell Options
@@ -65,6 +70,10 @@ fi
 
 GIT_PS1_SHOWDIRTYSTATE=1
 
+alias g='git'
+alias gk='gitk'
+alias gka='gitk --all'
+
 # Prompts ----------------------------------------------------------
 export PS1='\n[\[\e[0;32m\]\W\[\e[0m\]]$(__git_ps1)\$ '
 export PS2='\[\e[0;32m\]>\[\e[0m\] '
@@ -85,18 +94,17 @@ alias ...='cd ../..'
 alias ll='ls -hl'
 alias la='ls -a'
 alias lla='ls -lah'
+alias r='rm'
+alias rr='rm -r'
+alias rrf='rm -rf'
 
 # Misc -------------------------------------------------------------
-alias g='grep -i'  # Case insensitive grep
+alias scr='screen -h 5000'
+alias gr='grep -i'  # Case insensitive grep
 alias f='find . -iname'
-alias ducks='du -cksh * | sort -rn|head -11' # Lists folders and files sizes in the current folder
-alias top='top -o cpu'
-alias systail='tail -f /var/log/system.log'
-alias m='more'
-alias df='df -h'
 
 # Shows most used commands, cool script I got this from: http://lifehacker.com/software/how-to/turbocharge-your-terminal-274317.php
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
 # Editors ----------------------------------------------------------
-export EDITOR='emacs'
+export EDITOR='emacsclient'
