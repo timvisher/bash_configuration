@@ -2,35 +2,25 @@
 
 # System Environment Variables
 
-# source the system wide bashrc if it exists
-if [ -e /etc/bashrc ] ; then
-  source /etc/bashrc
-fi
+if [[ $OS == Windows* ]] ; then
+    unset TMP
+    unset TEMP
+    # Any completions you add in ~/.bash_completion are sourced last.
+    case $- in
+      *i*) [[ -f /etc/bash_completion ]] && . /etc/bash_completion ;;
+    esac
+    alias scr='cd ~; screen -h 50000 -s /bin/bash'
+else
+    # MacPorts
+    if [ -d /opt ] ; then
+      # If this shell is interactive, turn on programmable completion enhancements.
+      # Any completions you add in ~/.bash_completion are sourced last.
+      case $- in
+        *i*) [[ -f /opt/local/etc/bash_completion ]] && . /opt/local/etc/bash_completion ;;
+      esac
+    fi
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d ~/bin ] ; then
-  export PATH=~/bin:$PATH
-fi
-
-# MacPorts
-if [ -d /opt ] ; then
-  export PATH=/opt/local/bin:$PATH
-  export MANPATH=/opt/local/man:$MANPATH
-  # If this shell is interactive, turn on programmable completion enhancements.
-  # Any completions you add in ~/.bash_completion are sourced last.
-  case $- in
-    *i*) [[ -f /opt/local/etc/bash_completion ]] && . /opt/local/etc/bash_completion ;;
-  esac
-  alias scr='cd ~; screen -h 50000'
-fi
-
-if [ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin ] ; then
-  export PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin:$PATH
-fi
-
-# Set MANPATH so it includes users' private man if it exists
-if [ -d ~/share/man ]; then
-  export MANPATH=~/share/man:$MANPATH
+    alias scr='cd ~; screen -h 50000'
 fi
 
 # Shell Options
@@ -48,6 +38,14 @@ shopt -s histappend
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
 
+# Ignore some controlling instructions
+# HISTIGNORE is a colon-delimited list of patterns which should be excluded.
+# The '&' is a special pattern which suppresses duplicate entries.
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
+
+# Whenever displaying the prompt, write the previous line to disk
+export PROMPT_COMMAND="history -a"
+
 # Colors
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 alias ls='ls -FG'
@@ -56,11 +54,6 @@ alias ls='ls -FG'
 export HISTCONTROL="ignoredups"
 
 # Git -------------------------------------------------------------
-
-# Turn on advanced git bash completion if the file exists
-if [ -f ~/.git-completion.bash ]; then
-    source ~/.git-completion.bash
-fi
 
 GIT_PS1_SHOWDIRTYSTATE=1
 

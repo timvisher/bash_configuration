@@ -8,17 +8,21 @@ fi
 # System Environment Variables
 
 # source the system wide bashrc if it exists
-if [ -e /etc/bash.bashrc ] ; then
-  source /etc/bash.bashrc
+if [[ $OS == Windows* ]] ; then
+    if [ -e /etc/bash.bashrc ] ; then
+      source /etc/bash.bashrc
+    fi
+else
+    if [ -e /etc/bashrc ] ; then
+      source /etc/bashrc
+    fi
 fi
+
+# source the system wide bashrc if it exists
 
 # Set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
   export PATH=~/bin:$PATH
-fi
-
-if [ -d ~/bin/emacs/bin ] ; then
-  export PATH=~/bin/emacs/bin:$PATH
 fi
 
 # Set MANPATH so it includes users' private man if it exists
@@ -27,8 +31,31 @@ if [ -d ~/share/man ]; then
 fi
 
 # Set INFOPATH so it includes users' private info if it exists
-if [ -d ~/info ]; then
+if [ -d ~/info ] ; then
   INFOPATH=~/share/info:$INFOPATH
+fi
+
+# MacPorts
+if [ -d /opt/local ] ; then
+    export PATH=/opt/local/bin:$PATH
+    export MANPATH=/opt/local/man:$MANPATH
+fi
+
+# Emacs
+if [[ $OS == Windows* ]] ; then
+    if [ -d ~/bin/emacs/bin ] ; then
+      export PATH=~/bin/emacs/bin:$PATH
+    fi
+else
+    if [ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin ] ; then
+      export PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin:$PATH
+    fi
+fi
+
+# Git
+# Turn on advanced git bash completion if the file exists
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
 fi
 
 # Notes: ----------------------------------------------------------
@@ -49,8 +76,13 @@ fi
 # Hello Messsage
 echo -e "Kernel Information: " `uname -smr`
 echo -e "`bash --version`"
-systeminfo | fgrep -i 'system up time'
+if [[ $OS == Windows* ]] ; then
+    systeminfo | fgrep -i 'system up time'
+else
+    echo -ne "Uptime: "; uptime
+fi
 echo -ne "Server time is: "; date
 echo -e "\nPATH: $PATH"
 echo -e "\nMANPATH: $MANPATH"
+echo -e "\nAliases:\n"; alias
 
