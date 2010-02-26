@@ -1,25 +1,17 @@
 #!/bin/bash
 
-if [ -f ~/.bashrc ]; then
-  rm ~/.bashrc
+if [ -f ~/.bashrc ] ; then
+  mv ~/.bashrc ~/.bashrc.bak
 fi
 
-if [ -f ~/.bash_profile ]; then
-  rm ~/.bash_profile
+if [ -f ~/.bash_profile ] ; then
+  mv ~/.bash_profile ~/.bash_profile.bak
 fi
 
-if [ -f ~/.inputrc ]; then
-  rm ~/.inputrc
+if [ -f bashrc ] ; then
+  ln -s $1/bashrc ~/.bashrc
 fi
 
-if [ -f bashrc ]; then
-  cp bashrc ~/.bashrc
-fi
-
-if [ -f bash_profile ]; then
-  cp bash_profile ~/.bash_profile
-fi
-
-if [ -f inputrc ]; then
-  cp inputrc ~/.inputrc
+if [ -f bash_profile ] ; then
+  ln -s $1/bash_profile ~/.bash_profile
 fi
