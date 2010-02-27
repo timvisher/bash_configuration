@@ -1,10 +1,5 @@
 # See following for more information: http://www.infinitered.com/blog/?p=19
 
-# source the users bashrc if it exists
-if [ -f ~/.bashrc ] ; then
-  source ~/.bashrc
-fi
-
 # System Environment Variables
 
 # source the system wide bashrc if it exists
@@ -18,7 +13,11 @@ else
     fi
 fi
 
-# source the system wide bashrc if it exists
+# source the users bashrc if it exists
+if [ -e ~/.bashrc ] ; then
+  echo "Sourcing ~/.bashrc"
+  source ~/.bashrc
+fi
 
 # Set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
