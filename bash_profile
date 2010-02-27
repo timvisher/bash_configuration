@@ -15,7 +15,6 @@ fi
 
 # source the users bashrc if it exists
 if [ -e ~/.bashrc ] ; then
-  echo "Sourcing ~/.bashrc"
   source ~/.bashrc
 fi
 

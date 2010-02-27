@@ -69,7 +69,6 @@ alias gk='gitk'
 alias gka='gitk --all'
 
 # Prompts ----------------------------------------------------------
-echo "Setting PS1"
 export PS1='\n[\[\e[0;32m\]\W\[\e[0m\]]$(__git_ps1)\$ '
 export PS2='\[\e[0;32m\]>\[\e[0m\] '
 export PS3='\[\e[0;32m\]#?\[\e[0m\] '
