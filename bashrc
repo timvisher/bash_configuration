@@ -99,7 +99,7 @@ alias ...='cd ../..'
 alias gr='grep -i'  # Case insensitive grep
 alias f='find . -iname'
 alias df='df -h'
-alias scr='cd ~; screen -h 50000 -s -/bin/bash'
+alias scr='cd ~; screen -h 50000 -s /bin/bash'
 
 # Shows most used commands, cool script I got this from: http://lifehacker.com/software/how-to/turbocharge-your-terminal-274317.php
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
