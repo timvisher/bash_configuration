@@ -105,4 +105,8 @@ alias scr='cd ~; screen -h 50000 -s -/bin/bash'
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
 # Editors ----------------------------------------------------------
-export EDITOR='emacsclient'
+export EDITOR='vim'
+
+if type emacs; then
+    export EDITOR='emacsclient'
+fi
