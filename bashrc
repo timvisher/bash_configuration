@@ -88,7 +88,7 @@ alias gka='gitk --all'
 
 # Prompts ----------------------------------------------------------
 # Why won't '\n \[${COLOR_CYAN}\] [ \[${COLOR_YELLOW}\] \W \[${COLOR_CYAN}\] ]$(__git_ps1)\$ \[${COLOR_NC}\]' work?
-export PS1='\n\[\e[0;36m\][\[\e[1;33m\]\W\[\e[0;36m\]]$(__git_ps1)\$ \[\e[0m\]'
+export PS1='\n\[\e[0;36m\][\[\e[1;33m\]\W\[\e[0;36m\]]\[\e[1;32m\]$(__git_ps1)\[\e[0;36m\]\$ \[\e[0m\]'
 export PS2='\[\e[1;33m\]>\[\e[0m\] '
 export PS3='\[\e[1;33m\]#?\[\e[0m\] '
 export PS4='\[\e[1;33m\]+\[\e[0m\] '
