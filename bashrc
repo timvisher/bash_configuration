@@ -87,7 +87,8 @@ alias gk='gitk'
 alias gka='gitk --all'
 
 # Prompts ----------------------------------------------------------
-export PS1='\n[\[\e[1;33m\]\W\[\e[0m\]]$(__git_ps1)\$ '
+# Why won't '\n \[${COLOR_CYAN}\] [ \[${COLOR_YELLOW}\] \W \[${COLOR_CYAN}\] ]$(__git_ps1)\$ \[${COLOR_NC}\]' work?
+export PS1='\n\[\e[0;36m\][\[\e[1;33m\]\W\[\e[0;36m\]]$(__git_ps1)\$ \[\e[0m\]'
 export PS2='\[\e[1;33m\]>\[\e[0m\] '
 export PS3='\[\e[1;33m\]#?\[\e[0m\] '
 export PS4='\[\e[1;33m\]+\[\e[0m\] '
@@ -107,6 +108,7 @@ alias cr='cp -R'
 export CLICOLOR=1
 if [[ $OS == Windows* ]] ; then
     LS_PREAMBLE='ls --color=auto -F'
+    export LS_COLORS="di=36:ex=31:ln=01;31"
 else
     LS_PREAMBLE='ls -GF'
 fi
