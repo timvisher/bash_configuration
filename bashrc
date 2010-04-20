@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # This file is a merge between the 3.7-1 /etc/defaults/etc/skel/ files and [http://www.infinitered.com/blog/?p=19]
 
 # System Environment Variables
@@ -44,6 +46,25 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
 export PROMPT_COMMAND="history -a"
 
 # Colors
+export COLOR_NC='\e[0m' # No Color
+export COLOR_WHITE='\e[1;37m'
+export COLOR_BLACK='\e[0;30m'
+export COLOR_BLUE='\e[0;34m'
+export COLOR_LIGHT_BLUE='\e[1;34m'
+export COLOR_GREEN='\e[0;32m'
+export COLOR_LIGHT_GREEN='\e[1;32m'
+export COLOR_CYAN='\e[0;36m'
+export COLOR_LIGHT_CYAN='\e[1;36m'
+export COLOR_RED='\e[0;31m'
+export COLOR_LIGHT_RED='\e[1;31m'
+export COLOR_PURPLE='\e[0;35m'
+export COLOR_LIGHT_PURPLE='\e[1;35m'
+export COLOR_BROWN='\e[0;33m'
+export COLOR_YELLOW='\e[1;33m'
+export COLOR_GRAY='\e[0;30m'
+export COLOR_LIGHT_GRAY='\e[0;37m'
+alias colorslist="set | egrep 'COLOR_\w*'"  # lists all the colors
+
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 alias ls='ls -FG'
 
@@ -66,10 +87,10 @@ alias gk='gitk'
 alias gka='gitk --all'
 
 # Prompts ----------------------------------------------------------
-export PS1='\n[\[\e[0;32m\]\W\[\e[0m\]]$(__git_ps1)\$ '
-export PS2='\[\e[0;32m\]>\[\e[0m\] '
-export PS3='\[\e[0;32m\]#?\[\e[0m\] '
-export PS4='\[\e[0;32m\]+\[\e[0m\] '
+export PS1='\n[\[\e[1;33m\]\W\[\e[0m\]]$(__git_ps1)\$ '
+export PS2='\[\e[1;33m\]>\[\e[0m\] '
+export PS3='\[\e[1;33m\]#?\[\e[0m\] '
+export PS4='\[\e[1;33m\]+\[\e[0m\] '
 
 # Aliases
 
@@ -83,9 +104,16 @@ alias c='cp'
 alias cr='cp -R'
 
 # ls Convenience
-alias ll='ls -hl'
-alias la='ls -a'
-alias lla='ls -lah'
+export CLICOLOR=1
+if [[ $OS == Windows* ]] ; then
+    LS_PREAMBLE='ls --color=auto -F'
+else
+    LS_PREAMBLE='ls -GF'
+fi
+alias l='${LS_PREAMBLE}'
+alias ll='${LS_PREAMBLE} -hl'
+alias la='${LS_PREAMBLE} -A'
+alias lla='${LS_PREAMBLE} -lAh'
 
 # Default to human readable figures
 alias df='df -h'

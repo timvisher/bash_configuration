@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # See following for more information: http://www.infinitered.com/blog/?p=19
 
 # System Environment Variables
@@ -13,10 +15,7 @@ else
     fi
 fi
 
-# source the users bashrc if it exists
-if [ -e ~/.bashrc ] ; then
-  source ~/.bashrc
-fi
+source ~/.bashrc
 
 # Set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
@@ -67,14 +66,14 @@ fi
 
 # Hello Messsage
 echo -e "Kernel Information: " `uname -smr`
-echo -e "`bash --version`"
+echo -e "${COLOR_BROWN}`bash --version`${COLOR_NC}"
 if [[ $OS == Windows* ]] ; then
-    systeminfo | fgrep -i 'system up time'
+    echo "Windoze"
 else
     echo -ne "Uptime: "; uptime
 fi
-echo -ne "Server time is: "; date
-echo -e "\nPATH: $PATH"
+echo -ne "Server time is: `date`${COLOR_CYAN}"
+echo -e "\n\nPATH: $PATH"
 echo -e "\nMANPATH: $MANPATH"
 echo -e "\nAliases:"; alias
-
+echo -e "${COLOR_NC}";
