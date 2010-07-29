@@ -17,38 +17,6 @@ fi
 
 source ~/.bashrc
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d ~/bin ] ; then
-  export PATH=~/bin:$PATH
-fi
-
-# Set MANPATH so it includes users' private man if it exists
-if [ -d ~/share/man ]; then
-  MANPATH=~/share/man:$MANPATH
-fi
-
-# Set INFOPATH so it includes users' private info if it exists
-if [ -d ~/info ] ; then
-  INFOPATH=~/share/info:$INFOPATH
-fi
-
-# MacPorts
-if [ -d /opt/local ] ; then
-    export PATH=/opt/local/bin:$PATH
-    export MANPATH=/opt/local/man:$MANPATH
-fi
-
-# Emacs
-if [[ $OS == Windows* ]] ; then
-    if [ -d ~/bin/emacs/bin ] ; then
-      export PATH=~/bin/emacs/bin:$PATH
-    fi
-else
-    if [ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin ] ; then
-      export PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin:$PATH
-    fi
-fi
-
 # Notes: ----------------------------------------------------------
 # When you start an interactive shell (log in, open terminal or iTerm in OS X,
 # or create a new tab in iTerm) the following files are read and run, in this order:
