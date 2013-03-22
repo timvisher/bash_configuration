@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # See following for more information: http://www.infinitered.com/blog/?p=19
 
-# System Environment Variables
+# System Environment Variables. Set in System Panel -> Advanced -> Environment Variables (Windoze) or ~/.MacOSX/environment.plist (Mac)
+
+export PATH=~/bin:~/.lein/bin:~/.gem/ruby/1.8/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
 # source the system wide bashrc if it exists
 if [[ $OS == Windows* ]] ; then

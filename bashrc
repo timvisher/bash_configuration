@@ -8,18 +8,15 @@ if [[ $OS == Windows* ]] ; then
     unset TMP
     unset TEMP
     # Any completions you add in ~/.bash_completion are sourced last.
-    case $- in
-      *i*) [[ -f /etc/bash_completion ]] && . /etc/bash_completion ;;
+    case $- in *i*) [[ -f /etc/bash_completion ]] && . /etc/bash_completion ;;
     esac
-else
-    # MacPorts
-    if [ -d /opt ] ; then
-      # If this shell is interactive, turn on programmable completion enhancements.
-      # Any completions you add in ~/.bash_completion are sourced last.
-      case $- in
-        *i*) [[ -f /opt/local/etc/bash_completion ]] && . /opt/local/etc/bash_completion ;;
-      esac
-    fi
+elif [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+elif [ -d /opt ] ; then
+    # If this shell is interactive, turn on programmable completion enhancements.
+    # Any completions you add in ~/.bash_completion are sourced last.
+    case $- in *i*) [[ -f /opt/local/etc/bash_completion ]] && . /opt/local/etc/bash_completion ;;
+    esac
 fi
 
 # Shell Options
@@ -76,6 +73,10 @@ export HISTCONTROL="ignoredups"
 # Turn on advanced git bash completion if the file exists
 if [ -e ~/.git-completion.bash ]; then
     source ~/.git-completion.bash
+fi
+
+if [ -e ~/.git-prompt.sh ]; then
+    source ~/.git-prompt.sh
 fi
 
 GIT_PS1_SHOWDIRTYSTATE=1
@@ -137,6 +138,9 @@ alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 # Editors ----------------------------------------------------------
 export EDITOR='vim'
 
-if type emacs; then
+if type emacs > /dev/null; then
     export EDITOR='emacsclient'
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
