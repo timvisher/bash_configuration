@@ -20,4 +20,5 @@ fi
 tmux new -d $NAME_ARG -n editor
 tmux neww $TARGET_ARG -n admin
 tmux neww $TARGET_ARG -n services
+tmux select-window -t 0
 tmux att
