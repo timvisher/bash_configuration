@@ -1,23 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -eux
 
-if [ -f ~/.bashrc ] ; then
-  mv ~/.bashrc ~/.bashrc.bak
-fi
+BASH_CONF_HOME=${0%/*}
+DOT_FILES=$BASH_CONF_HOME/dotfiles/*
+BIN_FILES=$BASH_CONF_HOME/bin/*
 
-if [ -f ~/.bash_profile ] ; then
-  mv ~/.bash_profile ~/.bash_profile.bak
-fi
+for df in $DOT_FILES
+do
+  df_basename=${df##*/}
+  if [ -f ~/.$df_basename ]
+  then
+    mv ~/.$df_basename ~/.$df_basename.bak
+  fi
+  ln -s $df ~/.$df_basename
+  # source $df
+done
 
-if [ ! -f $PWD/bashrc ] ; then
-  echo "I need to be run from within the project directory."
-  exit
-fi
+for bf in $BIN_FILES
+do
+  bf_basename=${bf##*/}
+  if [ -f ~/bin/$bf_basename ]
+  then
+    mv ~/bin/$bf_basename ~/bin/$bf_basename.bak
+  fi
+  ln -s $bf ~/bin/$bf_basename
+done
 
-ln -s $PWD/bashrc ~/.bashrc
-
-if [ ! -f $PWD/bash_profile ] ; then
-  echo "I need to be run from within the project directory."
-  exit
-fi
-
-ln -s $PWD/bash_profile ~/.bash_profile
+echo Don\'t forget to add ~/bin to your PATH!

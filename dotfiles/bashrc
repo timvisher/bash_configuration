@@ -1,22 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This file is a merge between the 3.7-1 /etc/defaults/etc/skel/ files and [http://www.infinitered.com/blog/?p=19]
 
 # System Environment Variables
 
-if [[ $OS == Windows* ]] ; then
-    unset TMP
-    unset TEMP
-    # Any completions you add in ~/.bash_completion are sourced last.
-    case $- in *i*) [[ -f /etc/bash_completion ]] && . /etc/bash_completion ;;
-    esac
-elif [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-elif [ -d /opt ] ; then
-    # If this shell is interactive, turn on programmable completion enhancements.
-    # Any completions you add in ~/.bash_completion are sourced last.
-    case $- in *i*) [[ -f /opt/local/etc/bash_completion ]] && . /opt/local/etc/bash_completion ;;
-    esac
+HAS_BREW=''
+
+/usr/bin/env brew > /dev/null 2>&1
+if [ 0 -eq $? ]
+then
+  if [ -f $(brew --prefix)/etc/bash_completion ]
+  then
+    source $(brew --prefix)/etc/bash_completion
+  fi
+fi
+
+if [ -f /etc/bash_completion ]
+then
+  source /etc/bash_completion
 fi
 
 # Shell Options
@@ -89,7 +90,13 @@ alias gka='gitk --all'
 
 # Prompts ----------------------------------------------------------
 # Why won't '\n \[${COLOR_CYAN}\] [ \[${COLOR_YELLOW}\] \W \[${COLOR_CYAN}\] ]$(__git_ps1)\$ \[${COLOR_NC}\]' work?
+type __git_ps1 > /dev/null 2>&1
+if [ 0 -eq $? ]
+then
 export PS1='\n\[\e[0;36m\][\[\e[1;33m\]\W\[\e[0;36m\]]\[\e[1;32m\]$(__git_ps1)\[\e[0;36m\]\$ \[\e[0m\]'
+else
+export PS1='\n\[\e[0;36m\][\[\e[1;33m\]\W\[\e[0;36m\]]\[\e[1;32m\]\[\e[0;36m\]\$ \[\e[0m\]'
+fi
 export PS2='\[\e[1;33m\]>\[\e[0m\] '
 export PS3='\[\e[1;33m\]#?\[\e[0m\] '
 export PS4='\[\e[1;33m\]+\[\e[0m\] '
@@ -138,9 +145,7 @@ alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 # Editors ----------------------------------------------------------
 export EDITOR='vim'
 
-if type emacs > /dev/null; then
+if type emacs > /dev/null 2>&1
+then
     export EDITOR='emacsclient'
 fi
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
