@@ -45,3 +45,4 @@ echo -e "\n\nPATH: $PATH"
 echo -e "\nMANPATH: $MANPATH"
 echo -e "\nAliases:"; alias
 echo -e "${COLOR_NC}";
+
