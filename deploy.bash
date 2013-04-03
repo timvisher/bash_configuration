@@ -5,6 +5,8 @@ BASH_CONF_HOME=${0%/*}
 DOT_FILES=$BASH_CONF_HOME/dotfiles/*
 BIN_FILES=$BASH_CONF_HOME/bin/*
 
+cd $BASH_CONF_HOME
+
 for df in $DOT_FILES
 do
   df_basename=${df##*/}
@@ -12,7 +14,7 @@ do
   then
     mv ~/.$df_basename ~/.$df_basename.bak
   fi
-  ln -s $df ~/.$df_basename
+  ln -sf $PWD/${df#./} ~/.$df_basename
   # source $df
 done
 
@@ -23,7 +25,7 @@ do
   then
     mv ~/bin/$bf_basename ~/bin/$bf_basename.bak
   fi
-  ln -s $bf ~/bin/$bf_basename
+  ln -sf $PWD/${bf#./} ~/bin/$bf_basename
 done
 
 echo Don\'t forget to add ~/bin to your PATH!
