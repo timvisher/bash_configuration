@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#echo "Removing Auto-Save Files...""
+echo "Removing Auta-Save Files From $1"
+find $1 -name "*~" -exec /bin/rm {} \;
+echo "Emacs Auto-Save Files Removed From $1"

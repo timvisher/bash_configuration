@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grep "priority $1" /Users/tim/Documents/Jess/toDoList.12-3-05.txt

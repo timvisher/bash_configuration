@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo $1
+echo $PWD
+tar -cvzf $PWD/"$1".tgz $1

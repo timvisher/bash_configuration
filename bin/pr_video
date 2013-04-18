@@ -1,0 +1,2 @@
+#!/bin/bash
+mplayer -cache 8192 http://38.100.176.37/pr-200k-05-07

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+java -jar ~/.cradle/cradle-cli.jar $1

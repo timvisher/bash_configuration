@@ -1,0 +1,9 @@
+#!/bin/bash
+
+$*
+
+if [ $? -eq 0 ]
+then /usr/local/bin/growlnotify -m "\"$*\" done (SUCCESS)"
+
+else /usr/local/bin/growlnotify -m "\"$*\" done (FAILED)"
+fi

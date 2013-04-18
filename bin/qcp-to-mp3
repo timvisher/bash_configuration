@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd ~/Downloads
+for f in *qcp
+do
+  ffmpeg -i "$f" "$f".mp3
+done

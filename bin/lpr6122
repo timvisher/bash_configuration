@@ -1,0 +1,2 @@
+#! /bin/bash
+lpr -P hp_deskjet_6122

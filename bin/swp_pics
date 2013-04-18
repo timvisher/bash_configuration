@@ -1,0 +1,4 @@
+#/bin/bash
+mv /Users/tim/Pictures/iPhoto\ Library /Users/tim/Pictures/iPhoto\ Library.temp
+mv /Users/tim/Pictures/iPhoto\ Library.bak /Users/tim/Pictures/iPhoto\ Library
+mv /Users/tim/Pictures/iPhoto\ Library.temp /Users/tim/Pictures/iPhoto\ Library.bak

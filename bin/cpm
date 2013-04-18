@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp -Rn /Users/tim/Music/iTunes/iTunes\ Music/ /Volumes/Alex/Music/iTunes/iTunes\ Music/
+find /Volumes/Alex/Music/iTunes/iTunes\ Music/ -atime 1 -exec /usr/bin/open {} \;

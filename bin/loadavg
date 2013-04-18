@@ -1,0 +1,1 @@
+if [[ *darwin* != $OSTYPE ]]; then sysctl -n vm.loadavg | cut -f2-4 -d' '; else cat /proc/loadavg | cut -f1-3 -d' '; fi

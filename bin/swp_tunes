@@ -1,0 +1,4 @@
+#!/bin/bash
+mv /Users/tim/Music/iTunes /Users/tim/Music/iTunes.temp
+mv /Users/tim/Music/iTunes.bak /Users/tim/Music/iTunes
+mv /Users/tim/Music/iTunes.temp /Users/tim/Music/iTunes.bak

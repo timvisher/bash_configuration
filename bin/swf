@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd
+mv .fvwm .fvwm.temp
+mv .fvwm.bak .fvwm
+mv .fvwm.temp .fvwm.bak

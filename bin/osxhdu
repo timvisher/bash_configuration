@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo du -ak -I Volumes / | sort -rn | head

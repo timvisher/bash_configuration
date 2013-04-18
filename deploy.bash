@@ -10,22 +10,22 @@ cd $BASH_CONF_HOME
 for df in $DOT_FILES
 do
   df_basename=${df##*/}
-  if [ -f ~/.$df_basename ]
+  if [ -f ~/".$df_basename" ]
   then
-    mv ~/.$df_basename ~/.$df_basename.bak
+    echo mv ~/".$df_basename" ~/"bak.$df_basename"
   fi
-  ln -sf $PWD/${df#./} ~/.$df_basename
+  ln -sf "$PWD/${df#./}" ~/".$df_basename"
   # source $df
 done
 
 for bf in $BIN_FILES
 do
   bf_basename=${bf##*/}
-  if [ -f ~/bin/$bf_basename ]
+  if [ -f ~/"bin/$bf_basename" ]
   then
-    mv ~/bin/$bf_basename ~/bin/$bf_basename.bak
+    mv ~/"bin/$bf_basename" ~/"bin/bak.$bf_basename"
   fi
-  ln -sf $PWD/${bf#./} ~/bin/$bf_basename
+  ln -sf "$PWD/${bf#./}" ~/"bin/$bf_basename"
 done
 
 echo Don\'t forget to add ~/bin to your PATH!
