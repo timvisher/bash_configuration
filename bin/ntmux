@@ -22,3 +22,5 @@ tmux neww $TARGET_ARG -n admin
 tmux neww $TARGET_ARG -n services
 tmux select-window -t 0
 tmux att
+
+# tmux ls -F'#{session_name}'

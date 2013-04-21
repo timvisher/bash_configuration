@@ -4,11 +4,7 @@
 
 # System Environment Variables. Set in System Panel -> Advanced -> Environment Variables (Windoze) or ~/.MacOSX/environment.plist (Mac)
 
-# export PATH=~/bin:$PATH
-
-### Added by the Heroku Toolbelt
-# export PATH="/usr/local/heroku/bin:$PATH"
-
+export PATH=~/bin:$PATH
 
 # source the system wide bashrc if it exists
 if [ -f /etc/bashrc ] ; then
