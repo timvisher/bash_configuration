@@ -30,7 +30,7 @@ source ~/.bashrc
 
 # Hello Messsage
 echo -e "Kernel Information: " `uname -smr`
-echo -e "${COLOR_BROWN}`bash --version`${COLOR_NC}"
+echo -e "${COLOR_BROWN}$(bash --version)${COLOR_NC}"
 if [[ $OS == Windows* ]] ; then
     echo "Windoze"
 else
@@ -42,3 +42,13 @@ echo -e "\nMANPATH: $MANPATH"
 echo -e "\nAliases:"; alias
 echo -e "${COLOR_NC}";
 
+. $HOME/git/monetate-server/deployment/iam/awsenv.sh
+awsenv dev-tvisher
+
+# Setup for Monetate script
+export DEVBOX=dev-tvisher-1.monetate.org
+. ~/git/frontend/frontend/tools/bash/deployment.bash
+
+# Setup path and tab completion
+export PATH=$PATH:~/git/monetate-frontend/frontend/bin
+complete -F __monetate_script_completion diff_active.py

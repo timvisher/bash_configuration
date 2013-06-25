@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+set -eux
+
 cd ~/Downloads
 for f in *qcp
 do
-  ffmpeg -i "$f" "$f".mp3
+  ffmpeg -i "$f" "${f/%qcp/mp3}"
+  trash "$f"
 done
