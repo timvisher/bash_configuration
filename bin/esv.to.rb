@@ -13,5 +13,6 @@ else
 end
 
 Clipboard.copy copystr
-puts '"' + copystr + '" is all up in your clipboard'
+$stderr.puts '# "' + copystr + '" is all up in your clipboard'
+print copystr
 
