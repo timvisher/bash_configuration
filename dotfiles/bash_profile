@@ -54,13 +54,7 @@ echo -e "\n\nPATH: $PATH"
 echo -e "\nMANPATH: $MANPATH"
 echo -e "\nAliases:"; alias
 
-. $HOME/git/monetate-server/deployment/iam/awsenv.sh
-awsenv dev-tvisher
-
-# Setup for Monetate script
-export DEVBOX=dev-tvisher-1.monetate.org
-. ~/git/frontend/frontend/tools/bash/deployment.bash
-
-# Setup path and tab completion
-export PATH=$PATH:~/git/monetate-frontend/frontend/bin
-complete -F __monetate_script_completion diff_active.py
+if [[ -f ~/.$(hostname).sh ]]
+then
+  . ~/.$(hostname).sh
+fi
