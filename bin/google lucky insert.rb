@@ -12,7 +12,7 @@ http =     Net::HTTP.new(uri.host, uri.port)
 response = http.request(Net::HTTP::Get.new(uri.request_uri))
 
 if '302' == response.code
-  puts response['location']
+  print response['location']
 else
   warn "# You No Lucky!"
 end

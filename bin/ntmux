@@ -17,10 +17,37 @@ then
   TARGET_ARG=""
 fi
 
-tmux new -d $NAME_ARG -n editor
+TMUX_SESSIONS=$(tmux ls -F'#{session_name}')
+
+for s in $TMUX_SESSIONS
+do
+  if [[ $s == *$NAME* ]]
+  then
+    tmux att -t $s
+    exit 0
+  fi
+done
+
+GIT_PROJECTS=$(find ~ -name '.git' -type d -maxdepth 4)
+
+for gp in $GIT_PROJECTS
+do
+  PROJECT_DIR=$(dirname $gp)
+  PROJECT_NAME=$(basename $PROJECT_DIR)
+  if [[ $PROJECT_NAME == *$NAME* ]]
+  then
+    cd $PROJECT_DIR
+    tmux new -d -s $PROJECT_NAME -n editor 'emacs; reattach-to-user-namespace -l bash'
+    tmux neww -t $PROJECT_NAME -n admin
+    tmux neww -t $PROJECT_NAME -n services
+    tmux select-window -t 0
+    tmux att
+    exit 0
+  fi
+done
+
+tmux new -d $NAME_ARG -n editor 'emacs; reattach-to-user-namespace -l bash'
 tmux neww $TARGET_ARG -n admin
 tmux neww $TARGET_ARG -n services
 tmux select-window -t 0
 tmux att
-
-# tmux ls -F'#{session_name}'

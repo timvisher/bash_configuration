@@ -5,12 +5,15 @@ require 'rubygems'
 require 'open-uri'
 require 'clipboard'
 
-# require 'ruby-debug';debugger;1
-if ARGV.length == 0
-  copystr = 'http://esv.to/' + URI::encode(Clipboard.paste)
-else
-  copystr = 'http://esv.to/' + URI::encode(ARGV.join(' '))
+verse_part = !ARGV.empty? ? ARGV.join(' ') : gets
+
+if !verse_part || 0 == verse_part.length
+  verse_part = Clipboard.paste
 end
+
+# require 'ruby-debug';debugger;1
+
+copystr = 'http://esv.to/' + URI::encode(verse_part.sub('.', ':'))
 
 Clipboard.copy copystr
 $stderr.puts '# "' + copystr + '" is all up in your clipboard'
