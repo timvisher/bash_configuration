@@ -29,18 +29,30 @@ source ~/.bashrc
 #     .bashrc
 
 # Hello Messsage
+# echo -e "Kernel Information: " `uname -smr`
+# echo -e "${COLOR_BROWN}$(bash --version)${COLOR_NC}"
+# if [[ $OS == Windows* ]] ; then
+#     echo "Windoze"
+# else
+#     echo -ne "Uptime: "; uptime
+# fi
+# echo -ne "Server time is: `date`${COLOR_CYAN}"
+# echo -e "\n\nPATH: $PATH"
+# echo -e "\nMANPATH: $MANPATH"
+# echo -e "\nAliases:"; alias
+# echo -e "${COLOR_NC}";
+
 echo -e "Kernel Information: " `uname -smr`
-echo -e "${COLOR_BROWN}$(bash --version)${COLOR_NC}"
+echo -e "$(bash --version)"
 if [[ $OS == Windows* ]] ; then
     echo "Windoze"
 else
     echo -ne "Uptime: "; uptime
 fi
-echo -ne "Server time is: `date`${COLOR_CYAN}"
+echo -ne "Server time is: $(date)"
 echo -e "\n\nPATH: $PATH"
 echo -e "\nMANPATH: $MANPATH"
 echo -e "\nAliases:"; alias
-echo -e "${COLOR_NC}";
 
 . $HOME/git/monetate-server/deployment/iam/awsenv.sh
 awsenv dev-tvisher
