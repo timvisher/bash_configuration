@@ -37,7 +37,7 @@ do
   if [[ $PROJECT_NAME == *$NAME* ]]
   then
     cd $PROJECT_DIR
-    tmux new -d -s $PROJECT_NAME -n editor 'emacs; reattach-to-user-namespace -l bash'
+    tmux new -d -s $PROJECT_NAME -n editor 'reattach-to-user-namespace "bash -i -c emacs"; reattach-to-user-namespace -l bash'
     tmux neww -t $PROJECT_NAME -n admin
     tmux neww -t $PROJECT_NAME -n services
     tmux select-window -t 0
@@ -46,7 +46,7 @@ do
   fi
 done
 
-tmux new -d $NAME_ARG -n editor 'emacs; reattach-to-user-namespace -l bash'
+tmux new -d $NAME_ARG -n editor 'reattach-to-user-namespace -l bash -c emacs; reattach-to-user-namespace -l bash'
 tmux neww $TARGET_ARG -n admin
 tmux neww $TARGET_ARG -n services
 tmux select-window -t 0
