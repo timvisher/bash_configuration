@@ -30,6 +30,8 @@ done
 
 GIT_PROJECTS=$(find ~ -name '.git' -type d -maxdepth 4)
 
+NEW_WINDOW_COMMAND='reattach-to-user-namespace -l bash -c emacs; reattach-to-user-namespace -l bash'
+
 for gp in $GIT_PROJECTS
 do
   PROJECT_DIR=$(dirname $gp)
@@ -37,7 +39,7 @@ do
   if [[ $PROJECT_NAME == *$NAME* ]]
   then
     cd $PROJECT_DIR
-    tmux new -d -s $PROJECT_NAME -n editor 'reattach-to-user-namespace "bash -i -c emacs"; reattach-to-user-namespace -l bash'
+    tmux new -d -s $PROJECT_NAME -n editor "$NEW_WINDOW_COMMAND"
     tmux neww -t $PROJECT_NAME -n admin
     tmux neww -t $PROJECT_NAME -n services
     tmux select-window -t 0
@@ -46,7 +48,7 @@ do
   fi
 done
 
-tmux new -d $NAME_ARG -n editor 'reattach-to-user-namespace -l bash -c emacs; reattach-to-user-namespace -l bash'
+tmux new -d $NAME_ARG -n editor "$NEW_WINDOW_COMMAND"
 tmux neww $TARGET_ARG -n admin
 tmux neww $TARGET_ARG -n services
 tmux select-window -t 0
