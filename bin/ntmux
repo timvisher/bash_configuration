@@ -1,55 +1,56 @@
 #!/usr/bin/env bash
 set -exu
 
-NAME="${1:-}"
-NAME_ARG="-s $NAME"
-TARGET_ARG="-t $NAME"
-WORKING_DIR="${2:-}"
+function new_tmux {
+  session_name=$1
+  base_dir=$2
 
-if [ ! -z $WORKING_DIR ]
+  default_command=$(tmux show-options -gv default-command)
+
+  cd $base_dir
+
+  tmux new-session -d -s $session_name -n editor "$default_command -c emacs; $default_command"
+  tmux new-window -t $session_name -n admin
+  tmux new-window -t $session_name -n services
+  tmux select-window -t 1
+  tmux select-window -t 0
+  tmux attach
+}
+
+name=${1:-}
+base_dir=${2:-}
+
+if [[ ! -z $base_dir ]]
 then
-  cd $WORKING_DIR
+  new_tmux $name $base_dir
+  exit 0
+else
+  name=${name:-default}
+  base_dir=${base_dir:-$HOME}
 fi
 
-if [ -z $NAME ]
-then
-  NAME_ARG=""
-  TARGET_ARG=""
-fi
+tmux_sessions=$(tmux ls -F'#{session_name}')
 
-TMUX_SESSIONS=$(tmux ls -F'#{session_name}')
-
-for s in $TMUX_SESSIONS
+for s in $tmux_sessions
 do
-  if [[ $s == *$NAME* ]]
+  if [[ $s == *$name* ]]
   then
-    tmux att -t $s
+    tmux attach -t $s
     exit 0
   fi
 done
 
-GIT_PROJECTS=$(find ~ -name '.git' -type d -maxdepth 4)
+git_projects=$(find ~ -name '.git' -type d -maxdepth 4)
 
-NEW_WINDOW_COMMAND='reattach-to-user-namespace -l bash -c emacs; reattach-to-user-namespace -l bash'
-
-for gp in $GIT_PROJECTS
+for gp in $git_projects
 do
-  PROJECT_DIR=$(dirname $gp)
-  PROJECT_NAME=$(basename $PROJECT_DIR)
-  if [[ $PROJECT_NAME == *$NAME* ]]
+  project_dir=$(dirname $gp)
+  project_name=$(basename $project_dir)
+  if [[ $project_name == *$name* ]]
   then
-    cd $PROJECT_DIR
-    tmux new -d -s $PROJECT_NAME -n editor "$NEW_WINDOW_COMMAND"
-    tmux neww -t $PROJECT_NAME -n admin
-    tmux neww -t $PROJECT_NAME -n services
-    tmux select-window -t 0
-    tmux att
+    new_tmux $project_name $project_dir
     exit 0
   fi
 done
 
-tmux new -d $NAME_ARG -n editor "$NEW_WINDOW_COMMAND"
-tmux neww $TARGET_ARG -n admin
-tmux neww $TARGET_ARG -n services
-tmux select-window -t 0
-tmux att
+new_tmux $name $base_dir
