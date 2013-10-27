@@ -1,11 +1,27 @@
 #!/usr/bin/env bash
 set -exu
 
+function tmux_default_command {
+  if tmux show-options -gv default-command > /dev/null
+  then
+    tmux show-options -gv default-command
+    exit 0
+  fi
+
+  if [ $(uname) = 'Darwin' ]
+  then
+    echo 'reattach-to-user-namespace -l bash'
+  else
+    echo 'bash'
+  fi
+}
+
 function new_tmux {
   session_name=$1
   base_dir=$2
 
-  default_command=$(tmux show-options -gv default-command)
+  default_command=$(tmux_default_command)
+  default_command=${default_command:-}
 
   cd $base_dir
 
@@ -29,9 +45,14 @@ else
   base_dir=${base_dir:-$HOME}
 fi
 
-tmux_sessions=$(tmux ls -F'#{session_name}')
+function tmux_sessions {
+  if tmux ls -F'#{session_name}' > /dev/null
+  then
+    tmux ls -F'#{session_name}'
+  fi
+}
 
-for s in $tmux_sessions
+for s in $(tmux_sessions)
 do
   if [[ $s == *$name* ]]
   then
