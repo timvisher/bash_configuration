@@ -1,0 +1,13 @@
+{
+  "mod1": [
+    "command",
+    "option",
+    "control"
+  ],
+  "mod2": [
+    "command",
+    "option",
+    "control",
+    "shift"
+  ]
+}
