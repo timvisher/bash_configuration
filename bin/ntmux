@@ -61,12 +61,14 @@ do
   fi
 done
 
+IFS=$(echo -en "\n\b")
+
 git_projects=$(find ~ -name '.git' -type d -maxdepth 4)
 
 for gp in $git_projects
 do
-  project_dir=$(dirname $gp)
-  project_name=$(basename $project_dir)
+  project_dir=$(dirname "$gp")
+  project_name="$(basename $project_dir)"
   if [[ $project_name == *$name* ]]
   then
     new_tmux $project_name $project_dir
