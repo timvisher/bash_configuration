@@ -9,5 +9,10 @@
     "option",
     "control",
     "shift"
+  ],
+  "layouts": [
+    "tall",
+    "wide",
+    "fullscreen"
   ]
 }
