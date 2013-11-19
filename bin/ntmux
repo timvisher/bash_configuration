@@ -8,7 +8,7 @@ function tmux_default_command {
     exit 0
   fi
 
-  if [ $(uname) = 'Darwin' ]
+  if hash reattach-to-user-namespace 2> /dev/null
   then
     echo 'reattach-to-user-namespace -l bash'
   else
@@ -17,12 +17,7 @@ function tmux_default_command {
 }
 
 function emacs_command {
-  if [ $(uname) = 'Darwin' ]
-  then
-    echo 'emacs'
-  else
-    echo '"TERM=xterm-256color emacs"'
-  fi
+  echo 'emacs'
 }
 
 function new_tmux {
