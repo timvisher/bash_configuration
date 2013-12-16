@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -eu
+
+set -x
+
+for f in *.flac;
+do
+  ffmpeg -y -i "$f" -f ffmetadata "${f/%flac/txt}" && \
+    sed -i .bak "s/UNSYNCEDLYRICS/LYRICS/g" "${f/%flac/txt}"
+  ffmpeg -y -i "$f" -i "${f/%flac/txt}" -map_metadata 1 -c:a alac "${f/%flac/m4a}" "${f/%flac/jpg}" && \
+    AtomicParsley "${f/%flac/m4a}" --artwork "${f/%flac/jpg}" --overWrite && \
+    rm "${f/%flac/jpg}";
+done
