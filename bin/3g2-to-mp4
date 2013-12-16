@@ -3,7 +3,7 @@
 local_convert() {
     for file in $*
     do
-        handbrake -Z 'High Profile' -i "$file" -o "${file/3g2/mp4}" &
+        handbrake -Z 'High Profile' -i "$file" -o "${file/3g2/mp4}"
         trash "$file"
     done
 }
