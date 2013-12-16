@@ -13,5 +13,8 @@
   "layouts": [
     "tall",
     "fullscreen"
+  ],
+  "floating": [
+    "com.twitter.twitter-mac"
   ]
 }
