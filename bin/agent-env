@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+set -x
+
+echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/agent.env
