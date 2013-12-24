@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+set -x
+
+osascript -e 'tell application "System Events" to get kind of (POSIX file "'"${1-}"'" as alias)'
