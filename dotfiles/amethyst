@@ -16,6 +16,8 @@
   ],
   "floating": [
     "com.twitter.twitter-mac",
-    "com.apple.systempreferences"
+    "com.apple.systempreferences",
+    "com.apple.ScreenSharing",
+    "net.projectmagma.myth2"
   ]
 }
