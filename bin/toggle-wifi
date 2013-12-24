@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+set -x
+
+networksetup -setairportpower en0 Off && sleep 10 && networksetup -setairportpower en0 On
