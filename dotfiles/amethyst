@@ -18,6 +18,8 @@
     "com.twitter.twitter-mac",
     "com.apple.systempreferences",
     "com.apple.ScreenSharing",
-    "net.projectmagma.myth2"
+    "net.projectmagma.myth2",
+    "com.skitch.skitch",
+    "com.foxnsox.Howler"
   ]
 }
