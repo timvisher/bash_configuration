@@ -204,5 +204,5 @@ export EDITOR='vim'
 
 if type emacs > /dev/null 2>&1
 then
-    export EDITOR='emacsclient'
+    export EDITOR='emacs'
 fi
