@@ -20,6 +20,7 @@
     "com.apple.ScreenSharing",
     "net.projectmagma.myth2",
     "com.skitch.skitch",
-    "com.foxnsox.Howler"
+    "com.foxnsox.Howler",
+    "com.apple.systempreferences"
   ]
 }
