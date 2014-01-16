@@ -21,6 +21,7 @@
     "net.projectmagma.myth2",
     "com.skitch.skitch",
     "com.foxnsox.Howler",
-    "com.apple.systempreferences"
+    "com.apple.systempreferences",
+    "com.pixelmatorteam.pixelmator"
   ]
 }
