@@ -22,6 +22,8 @@
     "com.skitch.skitch",
     "com.foxnsox.Howler",
     "com.apple.systempreferences",
-    "com.pixelmatorteam.pixelmator"
+    "com.pixelmatorteam.pixelmator",
+    "com.apple.bootcampassistant",
+    "com.apple.DiskUtility"
   ]
 }
