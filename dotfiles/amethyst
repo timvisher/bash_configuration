@@ -24,6 +24,8 @@
     "com.apple.systempreferences",
     "com.pixelmatorteam.pixelmator",
     "com.apple.bootcampassistant",
-    "com.apple.DiskUtility"
+    "com.apple.DiskUtility",
+    "com.intel.nw",
+    "org.wesnoth.Wesnoth"
   ]
 }
