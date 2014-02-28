@@ -26,6 +26,8 @@
     "com.apple.bootcampassistant",
     "com.apple.DiskUtility",
     "com.intel.nw",
-    "org.wesnoth.Wesnoth"
+    "org.wesnoth.Wesnoth",
+    "fr.handbrake.HandBrake",
+    "com.apple.iTunes"
   ]
 }
