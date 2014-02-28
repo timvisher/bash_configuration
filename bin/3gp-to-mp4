@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+local_convert() {
+    for file in $*
+    do
+        handbrake -Z 'High Profile' -i "$file" -o "${file/3gp/mp4}"
+        trash "$file"
+    done
+}
+
+if [ 0 -lt $# ]
+then
+    local_convert $*
+else
+    local_convert `find ~/Downloads -type f -name "*3gp" -maxdepth 1`
+fi
+
