@@ -150,9 +150,12 @@ then
 else
   export PS1="\n$(hostname):\w\n\$ "
 fi
-export PS2="${COLOR_YELLOW}>${COLOR_NC} "
-export PS3="${COLOR_YELLOW}#?${COLOR_NC} "
-export PS4="${COLOR_YELLOW}+${COLOR_NC} "
+# export PS2="${COLOR_YELLOW}>${COLOR_NC} "
+export PS2=">\$ "
+# export PS3="${COLOR_YELLOW}#?${COLOR_NC} "
+export PS3="#? "
+# export PS4="${COLOR_YELLOW}+${COLOR_NC} "
+export PS4="+$ "
 
 # Functions
 
