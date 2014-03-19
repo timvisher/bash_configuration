@@ -12,7 +12,8 @@
   ],
   "layouts": [
     "tall",
-    "fullscreen"
+    "fullscreen",
+    "wide"
   ],
   "floating": [
     "com.twitter.twitter-mac",
@@ -29,5 +30,6 @@
     "org.wesnoth.Wesnoth",
     "fr.handbrake.HandBrake",
     "com.apple.iTunes"
-  ]
+  ],
+  "mouse-follows-focus": true
 }
