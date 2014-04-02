@@ -16,20 +16,24 @@
     "wide"
   ],
   "floating": [
-    "com.twitter.twitter-mac",
-    "com.apple.systempreferences",
-    "com.apple.ScreenSharing",
-    "net.projectmagma.myth2",
-    "com.skitch.skitch",
-    "com.foxnsox.Howler",
-    "com.apple.systempreferences",
-    "com.pixelmatorteam.pixelmator",
-    "com.apple.bootcampassistant",
+    "com.agilebits.onepassword-osx",
+    "com.apple.Aperture",
     "com.apple.DiskUtility",
+    "com.apple.ScreenSharing",
+    "com.apple.backup.launcher",
+    "com.apple.bootcampassistant",
+    "com.apple.iTunes",
+    "com.apple.systempreferences",
+    "com.apple.systempreferences",
+    "com.blacktree.Quicksilver",
+    "com.foxnsox.Howler",
     "com.intel.nw",
-    "org.wesnoth.Wesnoth",
+    "com.pixelmatorteam.pixelmator",
+    "com.skitch.skitch",
+    "com.twitter.twitter-mac",
     "fr.handbrake.HandBrake",
-    "com.apple.iTunes"
+    "net.projectmagma.myth2",
+    "org.wesnoth.Wesnoth"
   ],
   "mouse-follows-focus": true
 }
