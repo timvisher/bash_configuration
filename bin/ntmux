@@ -33,6 +33,7 @@ function new_tmux {
   tmux set-option -g default-command "$default_command"
   tmux new-window -t $session_name -n admin
   tmux new-window -t $session_name -n services
+  tmux new-window -t $session_name -n db
   tmux select-window -t 1
   tmux select-window -t 0
   tmux attach
