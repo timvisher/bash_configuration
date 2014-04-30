@@ -35,6 +35,5 @@
     "fr.handbrake.HandBrake",
     "net.projectmagma.myth2",
     "org.wesnoth.Wesnoth"
-  ],
-  "mouse-follows-focus": true
+  ]
 }
