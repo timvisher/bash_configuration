@@ -34,6 +34,7 @@ function new_tmux {
   tmux new-window -t $session_name -n admin
   tmux new-window -t $session_name -n services
   tmux new-window -t $session_name -n db
+  tmux new-window -t $session_name -n tests
   tmux select-window -t 1
   tmux select-window -t 0
   tmux attach
