@@ -67,7 +67,7 @@ done
 
 IFS=$(echo -en "\n\b")
 
-git_projects=$(find ~ -name '.git' -type d -maxdepth 4)
+git_projects=$(find ~ -type d -not -perm -g+r,u+r,o+r -prune -o -name '.git' -type d -maxdepth 4)
 
 for gp in $git_projects
 do
