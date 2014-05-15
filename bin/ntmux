@@ -16,10 +16,6 @@ function tmux_default_command {
   fi
 }
 
-function emacs_command {
-  echo 'emacs'
-}
-
 function new_tmux {
   session_name=$1
   base_dir=$2
@@ -29,7 +25,8 @@ function new_tmux {
 
   cd $base_dir
 
-  tmux new-session -d -s $session_name -n editor "$default_command -c $(emacs_command); $default_command"
+  tmux new-session -d -s $session_name -n editor "$default_command"
+  tmux send-keys 'emacs' 'C-m'
   tmux set-option -g default-command "$default_command"
   tmux new-window -t $session_name -n admin
   tmux new-window -t $session_name -n services
