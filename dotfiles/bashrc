@@ -159,7 +159,10 @@ export PS4="+$ "
 
 # Functions
 
-. ~/.find-functions.sh
+for f in ~/bin/functions/*.bash
+do
+  . $f
+done
 
 # Aliases
 

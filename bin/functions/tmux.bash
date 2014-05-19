@@ -26,7 +26,12 @@ function tmux_sessions {
 }
 
 function ntmux {
-  while getopts "n:b:" OPTION
+  local session_name=
+  local base_dir=
+  local dryrun=
+  local OPTIND
+
+  while getopts "n:b:d" OPTION
   do
     case $OPTION in
       n)
@@ -35,8 +40,11 @@ function ntmux {
       b)
         base_dir="$OPTARG"
         ;;
+      d)
+        dryrun=1
+        ;;
       ?)
-        printf "Usage: ntmux [-n session_name] [-b base_dir]"
+        printf "Usage: ntmux [-n session_name] [-b base_dir] [-d]"
         exit 2
         ;;
     esac
@@ -44,8 +52,13 @@ function ntmux {
 
   if [ ! -z "${session_name:-}" -a ! -z "${base_dir:-}" ]
   then
-    new_tmux_session $session_name $base_dir
-    exit 0
+    if [ $dryrun ]
+    then
+      echo new_tmux_session $session_name $base_dir
+    else
+      new_tmux_session $session_name $base_dir
+    fi
+    return 0
   fi
 
   if [ ! -z "${session_name:-}" ]
@@ -54,8 +67,13 @@ function ntmux {
     do
       if [[ $s == *$session_name* ]]
       then
-        tmux attach -t $s
-        exit 0
+        if [ $dryrun ]
+        then
+          echo tmux attach -t $s
+        else
+          tmux attach -t $s
+        fi
+        return 0
       fi
     done
 
@@ -65,8 +83,13 @@ function ntmux {
       local project_name=$(echo "$gp" | cut -f2)
       if [[ $project_name == *$session_name* ]]
       then
-        new_tmux_session $project_name $project_dir
-        exit 0
+        if [ $dryrun ]
+        then
+          echo new_tmux_session $project_name $project_dir
+        else
+          new_tmux_session $project_name $project_dir
+        fi
+        return 0
       fi
     done < ~/.cache.git_projects
   fi
@@ -74,5 +97,10 @@ function ntmux {
   # If base_dir only specified
   #   TODO: ???
 
-  ntmux -n default -b ~
+  if [ $dryrun ]
+  then
+    echo ntmux -n default -b ~
+  else
+    ntmux -n default -b ~
+  fi
 }

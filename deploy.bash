@@ -53,6 +53,7 @@ if ! link_points_here ~/bin $PWD/bin
 then
   mv_to_timestamp_bak ~/bin
 fi
+
 if [ ! -e ~/bin ]
 then
   ln -s $PWD/bin ~/bin
