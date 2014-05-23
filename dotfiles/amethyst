@@ -36,6 +36,7 @@
     "com.twitter.twitter-mac",
     "fr.handbrake.HandBrake",
     "net.projectmagma.myth2",
+    "org.virtualbox.app.VirtualBoxVM",
     "org.wesnoth.Wesnoth"
   ]
 }
