@@ -1,21 +1,26 @@
+#!/usr/bin/env bash
+
 function new_tmux_session {
   local session_name=$1
   local base_dir=$2
 
   local default_command="reattach-to-user-namespace -l bash"
 
-  cd $base_dir
+  (
+    cd $base_dir
 
-  tmux new-session -d -s $session_name -n editor "$default_command"
-  tmux send-keys 'emacs' 'C-m'
-  tmux set-option -g default-command "$default_command"
-  tmux new-window -t $session_name -n admin
-  tmux new-window -t $session_name -n services
-  tmux new-window -t $session_name -n db
-  tmux new-window -t $session_name -n tests
-  tmux select-window -t 1
-  tmux select-window -t 0
-  tmux attach
+    tmux new-session -d -s $session_name -n editor "$default_command"
+    tmux send-keys 'emacs' 'C-m'
+    tmux set-option -g default-command "$default_command"
+    tmux new-window -t $session_name -n admin
+    tmux new-window -t $session_name -n services
+    tmux new-window -t $session_name -n db
+    tmux new-window -t $session_name -n tests
+    tmux select-window -t 1
+    tmux select-window -t 0
+  )
+
+  tmux attach -t $session_name
 }
 
 function tmux_sessions {
@@ -26,26 +31,27 @@ function tmux_sessions {
 }
 
 function ntmux {
+
   local session_name=
   local base_dir=
   local dryrun=
-  local OPTIND
+  local OPTIND=
 
   while getopts "n:b:d" OPTION
   do
     case $OPTION in
       n)
-        session_name="$OPTARG"
+        local session_name="$OPTARG"
         ;;
       b)
-        base_dir="$OPTARG"
+        local base_dir="$OPTARG"
         ;;
       d)
-        dryrun=1
+        local dryrun=1
         ;;
       ?)
         printf "Usage: ntmux [-n session_name] [-b base_dir] [-d]"
-        exit 2
+        return 2
         ;;
     esac
   done
@@ -77,10 +83,14 @@ function ntmux {
       fi
     done
 
-    while read gp
+    local project_dir=
+    local project_name=
+    local IFS=$'\n'
+
+    for gp in $(< ~/.cache.git_projects )
     do
-      local project_dir=$(echo "$gp" | cut -f1)
-      local project_name=$(echo "$gp" | cut -f2)
+      project_dir=$(echo "$gp" | cut -f1)
+      project_name=$(echo "$gp" | cut -f2)
       if [[ $project_name == *$session_name* ]]
       then
         if [ $dryrun ]
@@ -91,7 +101,7 @@ function ntmux {
         fi
         return 0
       fi
-    done < ~/.cache.git_projects
+    done
   fi
 
   # If base_dir only specified
