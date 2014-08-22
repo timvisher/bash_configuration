@@ -109,8 +109,8 @@ alias gka='gitk --all'
 # These should work! What don't I understand!?
 # SMILEY="${COLOR_GREEN}:)${COLOR_NC}"
 # FROWNY="${COLOR_RED}:(${COLOR_NC}"
-SMILEY=":)"
-FROWNY=":("
+SMILEY="👊"
+FROWNY="💩"
 
 function goWell () {
   if [ $? = 0 ];
