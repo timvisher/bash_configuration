@@ -2,7 +2,9 @@
 set -eu
 
 BASH_CONF_HOME=${0%/*}
-DOT_FILES=$BASH_CONF_HOME/dotfiles/*
+
+shopt -s extglob
+DOT_FILES=$BASH_CONF_HOME/dotfiles/!(*~)
 BIN_FILES=$BASH_CONF_HOME/bin/*
 
 cd $BASH_CONF_HOME
