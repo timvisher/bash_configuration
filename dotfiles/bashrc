@@ -20,6 +20,8 @@ then
   source /etc/bash_completion
 fi
 
+PATH=$HOME/bin:$PATH
+
 # Shell Options
 # #############
 
@@ -141,16 +143,12 @@ show_exit_status() {
   fi
 }
 
-function random_prompt_animal {
-  echo -n $(gsort -R ~/.prompt_animals | head -1)
-}
-
 # Why won't '\n \[${COLOR_CYAN}\] [ \[${COLOR_YELLOW}\] \W \[${COLOR_CYAN}\] ]$(__git_ps1)\$ \[${COLOR_NC}\]' work?
 type __git_ps1 > /dev/null 2>&1
 if [ 0 -eq $? ]
 then
   #export PS1="\n$(hostname) \[[0;36m\][\[[1;33m\]\W\[[0;36m\]]\[[1;32m\]$(__git_ps1)\[[0;36m\]\$ \[[0m\]"
-  export PS1='\n\! @ $(show_time): $(show_exit_status)\n\[\u@$(hostname)\]:\w $(__git_ps1)\n$(random_prompt_animal) '
+  export PS1='\n\! @ $(show_time): $(show_exit_status)\n\[\u@$(hostname)\]:\w $(__git_ps1)\n$(go run ~/Dropbox/randomline/randomline.go ~/.prompt_animals 2>&1 ) '
 else
   export PS1="\n$(hostname):\w\n\$ "
 fi
