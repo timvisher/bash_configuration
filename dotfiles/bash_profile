@@ -13,6 +13,11 @@ fi
 
 source ~/.bashrc
 
+if [ -f $(brew --prefix)/etc/bash_completion ]
+then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
 # Notes: ----------------------------------------------------------
 # When you start an interactive shell (log in, open terminal or iTerm in OS X,
 # or create a new tab in iTerm) the following files are read and run, in this order:
