@@ -7,7 +7,7 @@
 /usr/bin/env brew > /dev/null 2>&1
 HAS_BREW=$?
 
-if [ $HAS_BREW ]
+if [ 0 -eq $HAS_BREW ]
 then
   if [ -f $(brew --prefix)/etc/bash_completion ]
   then
@@ -91,7 +91,7 @@ export HISTCONTROL="ignoredups"
 # Git -------------------------------------------------------------
 
 # Turn on advanced git bash completion if the file exists
-if [ $HAS_BREW ]
+if [ 0 -eq $HAS_BREW ]
 then
   git_completion_file=$(brew --prefix)/etc/bash_completion.d/git-comletion.sh
   if [ -e $git_completion_file ]; then
