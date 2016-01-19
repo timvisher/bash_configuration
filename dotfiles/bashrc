@@ -1,41 +1,15 @@
 #!/usr/bin/env bash
 
-# This file is a merge between the 3.7-1 /etc/defaults/etc/skel/ files and [http://www.infinitered.com/blog/?p=19]
-
 # System Environment Variables
 
-/usr/bin/env brew > /dev/null 2>&1
-HAS_BREW=$?
-
-if [ 0 -eq $HAS_BREW ]
-then
-  if [ -f $(brew --prefix)/etc/bash_completion ]
-  then
-    source $(brew --prefix)/etc/bash_completion
-  fi
-fi
-
-if [ -f /etc/bash_completion ]
-then
-  source /etc/bash_completion
-fi
-
-PATH=$HOME/bin:/usr/local/sbin:$PATH
+PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
 # Shell Options
 # #############
 
-# See man bash for more options...
-
-# Use case-insensitive filename globbing
 shopt -s nocaseglob
 
-# Make bash append rather than overwrite the history on disk
 shopt -s histappend
-
-# When changing directory small typos can be ignored by bash
-# for example, cd /vr/lgo/apaache would find /var/log/apache
-shopt -s cdspell
 
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
@@ -45,82 +19,19 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
 # Whenever displaying the prompt, write the previous line to disk
 export PROMPT_COMMAND="history -a"
 
-# Colors
-export COLOR_NC='\e[0m' # No Color
-export COLOR_WHITE='\e[1;37m'
-export COLOR_BLACK='\e[0;30m'
-export COLOR_BLUE='\e[0;34m'
-export COLOR_LIGHT_BLUE='\e[1;34m'
-export COLOR_GREEN='\e[0;32m'
-export COLOR_LIGHT_GREEN='\e[1;32m'
-export COLOR_CYAN='\e[0;36m'
-export COLOR_LIGHT_CYAN='\e[1;36m'
-export COLOR_RED='\e[0;31m'
-export COLOR_LIGHT_RED='\e[1;31m'
-export COLOR_PURPLE='\e[0;35m'
-export COLOR_LIGHT_PURPLE='\e[1;35m'
-export COLOR_BROWN='\e[0;33m'
-export COLOR_YELLOW='\e[1;33m'
-export COLOR_GRAY='\e[0;30m'
-export COLOR_LIGHT_GRAY='\e[0;37m'
-# export COLOR_NC='[0m' # No Color
-# export COLOR_WHITE='[1;37m'
-# export COLOR_BLACK='[0;30m'
-# export COLOR_BLUE='[0;34m'
-# export COLOR_LIGHT_BLUE='[1;34m'
-# export COLOR_GREEN='[0;32m'
-# export COLOR_LIGHT_GREEN='[1;32m'
-# export COLOR_CYAN='[0;36m'
-# export COLOR_LIGHT_CYAN='[1;36m'
-# export COLOR_RED='[0;31m'
-# export COLOR_LIGHT_RED='[1;31m'
-# export COLOR_PURPLE='[0;35m'
-# export COLOR_LIGHT_PURPLE='[1;35m'
-# export COLOR_BROWN='[0;33m'
-# export COLOR_YELLOW='[1;33m'
-# export COLOR_GRAY='[0;30m'
-# export COLOR_LIGHT_GRAY='[0;37m'
-alias colorslist="set | egrep 'COLOR_\w*'"  # lists all the colors
-
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
+GREP_OPTIONS='--color=auto'
+GREP_COLOR='1;32'
 alias ls='ls -FG'
 
-# Ignore duplicate commands in history
 export HISTCONTROL="ignoredups"
+export HISTFILESIZE=500000
+export HISTSIZE=500000
 
-# Git -------------------------------------------------------------
-
-# Turn on advanced git bash completion if the file exists
-if [ 0 -eq $HAS_BREW ]
-then
-  git_completion_file=$(brew --prefix)/etc/bash_completion.d/git-comletion.sh
-  if [ -e $git_completion_file ]; then
-    source $git_completion_file
-  fi
-
-  git_prompt_file=$(brew --prefix)/etc/bash_completion.d/git-prompt.sh
-  if [ -e $git_prompt_file ]; then
-    source $git_prompt_file
-  fi
-fi
-
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-
-alias g='hub'
-alias gk='gitk'
-alias gka='gitk --all'
-
-# Prompts ----------------------------------------------------------
-# These should work! What don't I understand!?
-# SMILEY="${COLOR_GREEN}:)${COLOR_NC}"
-# FROWNY="${COLOR_RED}:(${COLOR_NC}"
 SMILEY="👊"
 FROWNY="💩"
 
 function goWell () {
-  if [ $? = 0 ];
+  if [[ $? = 0 ]];
   then
     echo $SMILEY;
   else
@@ -128,13 +39,10 @@ function goWell () {
   fi
 }
 
-function show_time () {
-  date '+%m-%d %H:%M:%S'
-}
-
 if [[ ! $PROMPT_COMMAND =~ store_exit_status ]]; then
   export PROMPT_COMMAND="store_exit_status && ${PROMPT_COMMAND:-:}"
 fi
+
 store_exit_status() {
   LAST_EXIT_STATUS=$?
 }
@@ -148,56 +56,38 @@ show_exit_status() {
   fi
 }
 
-prompt_animal() {
-  go run ~/Dropbox/randomline/randomline.go ~/.prompt_animals 2>&1
-}
-
-# Why won't '\n \[${COLOR_CYAN}\] [ \[${COLOR_YELLOW}\] \W \[${COLOR_CYAN}\] ]$(__git_ps1)\$ \[${COLOR_NC}\]' work?
-type __git_ps1 > /dev/null 2>&1
-if [ 0 -eq $? ]
+if [[ $(type -t prompt_animal) != function ]]
 then
-  #export PS1="\n$(hostname) \[[0;36m\][\[[1;33m\]\W\[[0;36m\]]\[[1;32m\]$(__git_ps1)\[[0;36m\]\$ \[[0m\]"
-  export PS1='\n\! @ $(show_time): $(show_exit_status)\n\[\u@$(hostname)\]:\w $(__git_ps1)\n$(prompt_animal)  '
-else
-  export PS1='\n\! @ $(show_time): $(show_exit_status)\n\[\u@$(hostname)\]:\w \n$(prompt_animal)  '
+  prompt_animal() {
+    # go run ~/Dropbox/randomline/randomline.go ~/.prompt_animals 2>&1
+    gsort -R < ~/.prompt_animals | head -1
+  }
 fi
-# export PS2="${COLOR_YELLOW}>${COLOR_NC} "
+
+export PS1='\n\! @ \D{%m-%d %H:%M:%S}: $(show_exit_status)\n\[\u@$(hostname)\]:\w \n$(prompt_animal)  '
 export PS2=">\$ "
-# export PS3="${COLOR_YELLOW}#?${COLOR_NC} "
 export PS3="#? "
-# export PS4="${COLOR_YELLOW}+${COLOR_NC} "
 export PS4="+$ "
 
 # Functions
 
 for f in ~/bin/functions/*.bash
 do
-  . $f
+  if [[ -f $f ]]
+  then
+    . "$f"
+  fi
 done
 
 # Aliases
 
-# rm Convenience
-alias r='rm'
-alias rr='rm -r'
-alias rrf='rm -rf'
-
-# cp Convenience
-alias c='cp'
-alias cr='cp -R'
-
-# ls Convenience
-export CLICOLOR=1
-if [[ $OS == Windows* ]] ; then
-    LS_PREAMBLE='ls --color=auto -F'
-    export LS_COLORS="di=36:ex=31:ln=01;31"
-else
-    LS_PREAMBLE='ls -GF'
-fi
-alias l='${LS_PREAMBLE}'
-alias ll='${LS_PREAMBLE} -hl'
-alias la='${LS_PREAMBLE} -A'
-alias lla='${LS_PREAMBLE} -lAh'
+for f in ~/.aliases/*.bash;
+do
+  if [[ -f $f ]]
+  then
+    . "$f"
+  fi
+done
 
 # Default to human readable figures
 alias df='df -h'
@@ -207,14 +97,8 @@ alias du='du -h'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-# Misc -------------------------------------------------------------
-alias gr='grep -i'  # Case insensitive grep
-# alias f='find . -iname'
 alias df='df -h'
 alias ag='ag --pager "less -R"'
-
-# Shows most used commands, cool script I got this from: http://lifehacker.com/software/how-to/turbocharge-your-terminal-274317.php
-alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
 # Editors ----------------------------------------------------------
 export EDITOR='vim'

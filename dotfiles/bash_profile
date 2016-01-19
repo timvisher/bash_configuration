@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-# See following for more information: http://www.infinitered.com/blog/?p=19
-
-# System Environment Variables. Set in System Panel -> Advanced -> Environment Variables (Windoze) or ~/.MacOSX/environment.plist (Mac)
-
-export PATH=~/bin:$PATH
+export PATH=$HOME/bin:$PATH:$HOME/.rvm/bin
 
 # source the system wide bashrc if it exists
 if [ -f /etc/bashrc ] ; then
@@ -13,53 +9,14 @@ fi
 
 source ~/.bashrc
 
-if [ -f $(brew --prefix)/etc/bash_completion ]
-then
-  . $(brew --prefix)/etc/bash_completion
-fi
-
-# Notes: ----------------------------------------------------------
-# When you start an interactive shell (log in, open terminal or iTerm in OS X,
-# or create a new tab in iTerm) the following files are read and run, in this order:
-#     profile
-#     bashrc
-#     .bash_profile
-#     .bashrc (only because this file is run (sourced) in .bash_profile)
-#
-# When an interactive shell, that is not a login shell, is started
-# (when you run "bash" from inside a shell, or when you start a shell in
-# xwindows [xterm/gnome-terminal/etc] ) the following files are read and executed,
-# in this order:
-#     bashrc
-#     .bashrc
-
-# Hello Messsage
-# echo -e "Kernel Information: " `uname -smr`
-# echo -e "${COLOR_BROWN}$(bash --version)${COLOR_NC}"
-# if [[ $OS == Windows* ]] ; then
-#     echo "Windoze"
-# else
-#     echo -ne "Uptime: "; uptime
+# if [ -f $(brew --prefix)/etc/bash_completion ]
+# then
+#   . $(brew --prefix)/etc/bash_completion
 # fi
-# echo -ne "Server time is: `date`${COLOR_CYAN}"
-# echo -e "\n\nPATH: $PATH"
-# echo -e "\nMANPATH: $MANPATH"
-# echo -e "\nAliases:"; alias
-# echo -e "${COLOR_NC}";
 
-echo -e "Kernel Information: " `uname -smr`
-echo -e "$(bash --version)"
-if [[ $OS == Windows* ]] ; then
-    echo "Windoze"
-else
-    echo -ne "Uptime: "; uptime
-fi
-echo -ne "Server time is: $(date)"
-echo -e "\n\nPATH: $PATH"
-echo -e "\nMANPATH: $MANPATH"
-echo -e "\nAliases:"; alias
-
-if [[ -f ~/.$(hostname).sh ]]
+if [[ -f ~/.$(hostname).bash ]]
 then
-  . ~/.$(hostname).sh
+  . ~/."$(hostname)".bash
 fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

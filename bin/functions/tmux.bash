@@ -9,6 +9,7 @@ function new_tmux_session {
   (
     cd $base_dir
 
+    # tmux -vvvv new-session -d -s $session_name -n editor "$default_command" # for debugging
     tmux new-session -d -s $session_name -n editor "$default_command"
     if [[ Darwin = $(uname) ]]
     then
